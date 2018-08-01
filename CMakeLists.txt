@@ -8,9 +8,9 @@ project(novatel)
 
 option(BUILD_WITH_ROS "Build ROS node and use catkin." ON)
 
-if (NOT catkin_FOUND)
-   SET(BUILD_WITH_ROS OFF)
-endif(NOT catkin_FOUND)
+# if (NOT catkin_FOUND)
+#    SET(BUILD_WITH_ROS OFF)
+# endif(NOT catkin_FOUND)
 
 if (BUILD_WITH_ROS)
   ## Find catkin macros and libraries
@@ -18,7 +18,7 @@ if (BUILD_WITH_ROS)
 	## is used, also find other catkin packages
 	## libraries found here are added to catkin_LIBRARIES and linked automatically
 	find_package(catkin COMPONENTS serial roslib roscpp rosconsole tf gps_msgs nav_msgs sensor_msgs)
-	
+
   ## LIBRARIES: libraries you create in this project that dependent projects also need
 	## CATKIN_DEPENDS: catkin_packages dependent projects also need
 	## DEPENDS: system dependencies of this project that dependent projects also need
@@ -86,21 +86,21 @@ endif(serial_FOUND)
 if (NOVATEL_BUILD_EXAMPLES)
 	# Declare a cpp executable
 	add_executable(novatel_example examples/novatel_example.cpp)
-	target_link_libraries(novatel_example 
+	target_link_libraries(novatel_example
                         ${LIB_NAME}
-                        ${catkin_LIBRARIES} 
+                        ${catkin_LIBRARIES}
                         ${Boost_LIBRARIES})
 
   add_executable(novatel_read_from_file examples/novatel_read_from_file.cpp)
-  target_link_libraries(novatel_read_from_file 
+  target_link_libraries(novatel_read_from_file
                         ${LIB_NAME}
-                        ${catkin_LIBRARIES} 
+                        ${catkin_LIBRARIES}
                         ${Boost_LIBRARIES})
 
 	add_executable(novatel_read_bestutm examples/novatel_read_bestutm.cpp)
-	target_link_libraries(novatel_read_bestutm 
+	target_link_libraries(novatel_read_bestutm
                         ${LIB_NAME}
-                        ${catkin_LIBRARIES} 
+                        ${catkin_LIBRARIES}
                         ${Boost_LIBRARIES})
 endif (NOVATEL_BUILD_EXAMPLES)
 
