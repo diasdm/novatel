@@ -150,7 +150,7 @@ public:
     nav_msgs::Odometry cur_odom_;
     cur_odom_.header.stamp = sat_fix.header.stamp;
     cur_odom_.header.frame_id = "utm";
-    cur_odom_.child_frame_id = "novatel"
+    cur_odom_.child_frame_id = "novatel";
     cur_odom_.pose.pose.position.x = pos.easting;
     cur_odom_.pose.pose.position.y = pos.northing;
     cur_odom_.pose.pose.position.z = pos.height;
@@ -523,6 +523,8 @@ public:
 
     //em_.setDataCallback(boost::bind(&EM61Node::HandleEmData, this, _1));
     gps_.Connect(port_,baudrate_);
+
+    gps_.SendCommand("SBASCONTROL ENABLE ANY 0 ZEROTOTWO");
 
     // configure default log sets
     if (gps_default_logs_period_>0) {
