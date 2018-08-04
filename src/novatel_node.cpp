@@ -149,7 +149,8 @@ public:
 
     nav_msgs::Odometry cur_odom_;
     cur_odom_.header.stamp = sat_fix.header.stamp;
-    cur_odom_.header.frame_id = "/odom";
+    cur_odom_.header.frame_id = "utm";
+    cur_odom_.child_frame_id = "novatel"
     cur_odom_.pose.pose.position.x = pos.easting;
     cur_odom_.pose.pose.position.y = pos.northing;
     cur_odom_.pose.pose.position.z = pos.height;
@@ -162,6 +163,7 @@ public:
     cur_odom_.pose.covariance[14] = pos.height_standard_deviation * pos.height_standard_deviation;
     // have no way of knowing roll and pitch with just GPS
     cur_odom_.pose.covariance[21] = DBL_MAX;
+    cur_odom_.pose.covariance[28] = DBL_MAX;
     cur_odom_.pose.covariance[28] = DBL_MAX;
 
     // see if there is a recent velocity message
@@ -184,7 +186,6 @@ public:
         cur_odom_.twist.covariance[0] = sigma_v*sigma_v;
         cur_odom_.twist.covariance[7] = sigma_v*sigma_v;
       } else {
-        cur_odom_.pose.covariance[35] = DBL_MAX;
         cur_odom_.twist.covariance[0] = DBL_MAX;
         cur_odom_.twist.covariance[7] = DBL_MAX;
       }
