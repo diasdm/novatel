@@ -436,7 +436,7 @@ public:
       sat_fix.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
 
     sat_fix.header.stamp = ros::Time::now();
-    sat_fix.header.frame_id = "/lla";
+    sat_fix.header.frame_id = "/novatel";
     sat_fix.latitude = pos.latitude;
     sat_fix.longitude = pos.longitude;
     sat_fix.altitude = pos.height;
