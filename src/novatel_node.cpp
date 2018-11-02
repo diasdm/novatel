@@ -524,7 +524,9 @@ public:
     //em_.setDataCallback(boost::bind(&EM61Node::HandleEmData, this, _1));
     gps_.Connect(port_,baudrate_);
 
-    gps_.SendCommand("SBASCONTROL ENABLE ANY 0 ZEROTOTWO");
+    if (use_sbas_) {
+        gps_.SendCommand("SBASCONTROL ENABLE ANY 0 ZEROTOTWO");
+    }
 
     // configure default log sets
     if (gps_default_logs_period_>0) {
@@ -680,6 +682,9 @@ protected:
     nh_.param("ecefpos_topic", ecefpos_topic_, std::string("gps_fix_ecef"));
     ROS_INFO_STREAM(name_ << ": ECEF Position Topic: " << ecefpos_topic_);
 
+    nh_.param<bool>("use_sbas", use_sbas_, false);
+    ROS_INFO_STREAM(name_ << ": Use SBAS: " << use_sbas_);
+
     return true;
   }
 
@@ -706,6 +711,7 @@ protected:
   std::string psrpos_topic_;
   std::string psrpos_full_topic_;
   std::string ecefpos_topic_;
+  bool use_sbas_;
 
   std::string port_;
   std::string log_commands_;
