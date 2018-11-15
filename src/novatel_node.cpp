@@ -110,7 +110,7 @@ public:
 
     sensor_msgs::NavSatFix sat_fix;
     sat_fix.header.stamp = ros::Time::now();
-    sat_fix.header.frame_id = "/odom";
+    sat_fix.header.frame_id = "odom";
 
     if (pos.position_type == NONE)
       sat_fix.status.status = sensor_msgs::NavSatStatus::STATUS_NO_FIX;
@@ -213,7 +213,7 @@ public:
 
     sensor_msgs::NavSatFix sat_fix;
     sat_fix.header.stamp = ros::Time::now();
-    sat_fix.header.frame_id = "/odom";
+    sat_fix.header.frame_id = "odom";
 
     if (ins_pva.status == INS_SOLUTION_GOOD)
       sat_fix.status.status = sensor_msgs::NavSatStatus::STATUS_FIX;
@@ -232,7 +232,7 @@ public:
 
     nav_msgs::Odometry cur_odom_;
     cur_odom_.header.stamp = sat_fix.header.stamp;
-    cur_odom_.header.frame_id = "/odom";
+    cur_odom_.header.frame_id = "odom";
     cur_odom_.pose.pose.position.x = easting;
     cur_odom_.pose.pose.position.y = northing;
     cur_odom_.pose.pose.position.z = ins_pva.height;
@@ -436,7 +436,7 @@ public:
       sat_fix.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
 
     sat_fix.header.stamp = ros::Time::now();
-    sat_fix.header.frame_id = "/novatel";
+    sat_fix.header.frame_id = "novatel";
     sat_fix.latitude = pos.latitude;
     sat_fix.longitude = pos.longitude;
     sat_fix.altitude = pos.height;
@@ -490,7 +490,7 @@ public:
     nav_msgs::Odometry ecef_pos;
 
     ecef_pos.header.stamp = ros::Time::now();
-    ecef_pos.header.frame_id = "/ecef";
+    ecef_pos.header.frame_id = "ecef";
     ecef_pos.pose.pose.position.x = best_xyz.x_position;
     ecef_pos.pose.pose.position.y = best_xyz.y_position;
     ecef_pos.pose.pose.position.z = best_xyz.z_position;
